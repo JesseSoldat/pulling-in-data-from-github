@@ -22,7 +22,7 @@
 		},
 		componentDidMount: function(){
 			var component = this;
-			$.get("https://api.github.com/users/jessesoldat", function(data){
+			$.get("https://api.github.com/users/" + this.props.login, function(data){
 				component.setState(data);
 
 			});	
@@ -40,10 +40,17 @@
 		}
 	});
 	var Main = React.createClass({
+		getInitialState: function(){
+			return {logins: ['faircloth','jbrz','demostudent']};
+		},
 		render: function(){
+			var cards = this.state.logins.map(function(login,i){
+				return <Card login={login} key={i} />;
+			})
 			return (
 				<div>
-					<Card />
+					<Card login={"jessesoldat"}/>
+					{cards}
 				</div>
 				);
 		}
